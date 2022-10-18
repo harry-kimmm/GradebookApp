@@ -2,20 +2,33 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class GradeBook {
-    private static double testCalc(double score, int t, double weight) {
-        double testGrade = (score*weight)/t;
-        return testGrade;
+    private static double gradeCalc(double score, int t, int t2, int t3, String weight) {
+        double testGrade = 0;
+        if (weight == "Test") {
+            double weightt = 0.70f;
+            testGrade = (score * weightt) / t;
+        }
+        double homeworkGrade = 0;
+        if (weight == "Homework") {
+            double weighth = 0.20f;
+            homeworkGrade = (score * weighth) / t;
+        }
+        double participationGrade = 0;
+        if (weight == "Participation") {
+            double weightp = 0.10f;
+            participationGrade = (score * weightp) / t;
+        }
+        double totalGrade = testGrade + homeworkGrade + participationGrade;
+        return totalGrade;
     }
 
     public static void main(String[] args) {
         //Hard-coded variables | Tests: 70%, Homework: 20%, Participation: 10%
         String name = "Jamal";
-        double testWeight = 0.70f;
-        double homeworkWeight = 0.20f;
-        double participationWeight = 0.10;
         int tterm = 1;
         int hterm = 1;
         int pterm = 1;
+        double gradeTotal = 0f;
 
         String again = "Yes";
         while(!Objects.equals(again,"Stop"))
@@ -31,11 +44,10 @@ public class GradeBook {
             System.out.print("Enter category (Test, Homework, Participation: ");
             String category = assignmentName.nextLine();
 
-            if (category.equals("Test"))
-            {
-                System.out.println(testCalc(score, tterm, testWeight));
-                tterm++;
-            }
+            System.out.println(gradeCalc(score, tterm, hterm, pterm, category));
+            tterm++;
+
+
 
 
             Scanner endLoop = new Scanner(System.in);
